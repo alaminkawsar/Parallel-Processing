@@ -142,3 +142,12 @@ MPI_Recv(
 );
 ````
 
+
+
+
+
+
+
+*collected from:*
+[Research Computing User Guide](https://curc.readthedocs.io/en/latest/programming/MPI-C.html)
+
