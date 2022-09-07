@@ -1,3 +1,4 @@
+//code link: https://gist.github.com/AshanthaLahiru/bfa1a631f6af05af93e98538eeca3018
 #include<bits/stdc++.h>
 #include "mpi.h"
 #include<time.h>
@@ -12,6 +13,6 @@ MPI_Status status;
 
 
 int main(){
-    
+
 }
 
