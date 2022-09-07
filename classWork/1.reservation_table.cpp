@@ -89,7 +89,7 @@ int main(){
     printf("\n\n");
 
 
-    //Task-4: New initiation and find collision point
+    //Task-4: Any New initiation and find collision point
     map<pair<int,int>,bool>already_occupy;
     queue<pair<int,int>>consecutive;
 
@@ -102,14 +102,14 @@ int main(){
         }
     }
 
-
-    int point_x = 1, point_y=3;
-    cin>>point_x>>point_y;
-    for(int i=1;i<=time;i++){
+    int point_x = 1, point_y=2;
+    //cin>>point_x>>point_y;
+    point_x--;
+    point_y--;
+    for(int k=1;k<=time;k++){
         point_x=0;
-        point_y=i-1;
-        point_y--;
-        bool get = 0;
+        point_y=k-1;
+        bool get = true;
 
         queue<pair<int,int>>qq=consecutive;
         vector<pair<int,int>>store;
@@ -124,22 +124,23 @@ int main(){
             }
             if(get_x>-1 and get_y>-1){
                 if(already_occupy.count({get_x,get_y})>0){
-                    printf("Collision Found for point (1,%d). Collison point: %d %d\n",i,get_x+1,get_y+1);
-                    get=1;
+                    printf("Collision Found for initiation point (1,%d). Collison point: %d %d\n",k,get_x+1,get_y+1);
+                    get=false;
                     i=INT_MAX;
                     break;
                 }
             }
         }
-        consecutive=qq;
-        if(!get){
-
-            printf("No Collision Found for point(1,%d)\n",i);
+        
+        if(get){
+            printf("No Collision Found for point(1,%d)\n",point_y+1);
             for (auto it: store){
-                already_occupy[it]++;
+                already_occupy[it]=true;
+                qq.push(it);
             }
-
         }
+        consecutive=qq;
+        //break;
     }
     
     
