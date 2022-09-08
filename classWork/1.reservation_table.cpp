@@ -82,8 +82,9 @@ int main(){
     vector<int>temp(time,0);
     for(auto it: permissible_latency){
         temp[it]=1;
+        //cout<<it<<endl;
     }
-    for(int i=0;i<=time;i++){
+    for(int i=1;i<=time;i++){
         printf("%d ",temp[i]);
     }
     printf("\n\n");
@@ -103,12 +104,16 @@ int main(){
     }
 
     int point_x = 1, point_y=2;
-    //cin>>point_x>>point_y;
-    point_x--;
-    point_y--;
+
     for(int k=1;k<=time;k++){
-        point_x=0;
-        point_y=k-1;
+        point_x=1;
+        point_y=k;
+
+        //cin>>point_x>>point_y;
+
+        point_y--;
+        point_x--;
+
         bool get = true;
 
         queue<pair<int,int>>qq=consecutive;
@@ -124,7 +129,7 @@ int main(){
             }
             if(get_x>-1 and get_y>-1){
                 if(already_occupy.count({get_x,get_y})>0){
-                    printf("Collision Found for initiation point (1,%d). Collison point: %d %d\n",k,get_x+1,get_y+1);
+                    printf("Collision Found for initiation point (1,%d). Collison point: %d %d\n",point_y+1,get_x+1,get_y+1);
                     get=false;
                     i=INT_MAX;
                     break;
@@ -139,6 +144,7 @@ int main(){
                 qq.push(it);
             }
         }
+        //break;
         consecutive=qq;
         //break;
     }
