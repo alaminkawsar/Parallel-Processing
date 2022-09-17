@@ -20,7 +20,7 @@ int main(int argc,char* argv[]){
         element_per_process = n/nprocess;
         for(i=1;i<nprocess-1;i++){
             index = i*element_per_process;
-            MPI_Send(&element_per_process, 1,MPI_INT,i, 0, MPI_COMM_WORLD);
+            MPI_Send(&element_per_process, 1 ,MPI_INT,i, 0, MPI_COMM_WORLD);
             MPI_Send(&ar[index], element_per_process, MPI_INT,i, 0, MPI_COMM_WORLD);
         }
 
