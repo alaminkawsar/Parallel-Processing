@@ -80,7 +80,7 @@ int main(){
     
     printf("Collision Vector:\n");
     vector<int>temp(time,0);
-    for(auto it: permissible_latency){
+    for(auto it: forbiden_latency){
         temp[it]=1;
         //cout<<it<<endl;
     }
