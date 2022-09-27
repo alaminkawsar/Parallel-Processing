@@ -52,7 +52,7 @@ set<int>find_permissible_latency(set<int>&st, int n){
 
 
 int main(){
-    freopen("input.txt","r",stdin);
+    freopen("reservation_input.txt","r",stdin);
 
     int n = 3;
     vector<string>vec(MAX);
