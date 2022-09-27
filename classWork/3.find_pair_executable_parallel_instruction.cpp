@@ -16,21 +16,10 @@
 using namespace std;
 int const sz=(int)2e5+5;
 
-vector<int>adj[30];
+int mat[50][50];
 
 bool vis[27];
 string str;
-void dfs(int n){
-    vis[n]=true;
-    for(int i=0;i<adj[n].size();i++){
-
-        if(vis[adj[n][i]]) continue;
-        //cout<<adj[n][i]<<endl;
-        str+=(adj[n][i]+'A');
-        //cout<<str<<endl;
-        dfs(adj[n][i]);
-    }
-}
 
 bool find_dependency(string a,string b){
     // dependency check
@@ -44,6 +33,13 @@ bool find_dependency(string a,string b){
 
     return true;
 }
+string get_dependency(string a,string b){
+    string ans;
+    for(int i=2;i<a.size();i++){
+        if(a[i]!=b[0]) ans+=(i+1+'0');
+    }
+    return ans;
+}
 
 void solve()
 {
@@ -55,6 +51,10 @@ void solve()
         cin>>s;
         s=s.substr(3,s.size()-3);
         list.push_back(s);
+        cout<<s<<endl;
+    }
+    for(int i=0;i<n;i++){
+        cout<<list[i]<<endl;
     }
     vector<pair<int,int>>ans;
 
@@ -74,49 +74,35 @@ void solve()
 
 
     // Task-2: Find Dependency Graph
-    vector<string>dependency_list;
+    
     for(int i=0;i<n;i++){
-        int id = list[i][0]-'A';
-        //cout<<id<<" :";
-        for(int j=2;j<list[i].size();j++){
-            if(list[i][j]>='A' and list[i][j]<='Z'){
-                adj[id].push_back(list[i][j]-'A');
-                //printf("%d ",list[i][j]-'A');
-            }
-        }
-        //printf("\n");
-    }
-    printf("\n");
-    for(int i=0;i<n;i++){
-        clr(vis,0);
-        dfs(list[i][0]-'A');
-        //cout<<str<<endl;
-        vector<int>dep;
         for(int j=0;j<n;j++){
-            for(int x=0;x<str.size();x++){
-                if(list[i][0]==str[i]) continue;
-                if(list[j][0]==str[x]){
-                    dep.push_back(j);
-                    
+            if(i==j) continue;
+            for(int k=3;k<list[j].size();k++){
+                if(list[i][0]==list[j][k]){
+                    mat[i][j]=1;
+                    break;
                 }
             }
         }
-        printf("P%d dependes on: ",i+1);
-        for(int j=0;j<dep.size();j++){
-            printf("P%d ",dep[j]+1);
-        }
-        printf("\n");
-        str="";
     }
     printf("\n");
-
-
-    
-    
+    for(int i=0;i<n;i++){
+        printf("P%d--->",i+1);
+        for(int j=0;j<n;j++){
+            if(i==j) continue;
+            if(mat[i][j]){
+                printf("P%d ",j+1);
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("\n");    
 }
 int main()
 {
-    freopen("input.txt","r",stdin);
+    freopen("bernstain_input.txt","r",stdin);
     //freopen("output.txt","w",stdout);
     int t=1,ts=0; //cin>>t;
     while(t--){
