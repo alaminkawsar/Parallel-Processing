@@ -17,15 +17,7 @@ set<int> find_forbidden_latency(vector<string> &reserve, int n){
                 }
             }
         }
-        matrix.push_back(dis);
-
     }
-    // for(int i=0;i<matrix.size();i++){
-    //     for(int j=0;j<matrix[i].size();j++){
-    //         printf("%d ",matrix[i][j]);
-    //     }
-    //     cout<<endl;
-    // }
     return forbid;
 }
 
@@ -137,9 +129,7 @@ int main(){
                 qq.push(it);
             }
         }
-        //break;
         consecutive=qq;
-        //break;
     }
     
     
