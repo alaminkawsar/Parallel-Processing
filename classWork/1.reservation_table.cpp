@@ -4,11 +4,6 @@ using namespace std;
 
 set<int> find_forbidden_latency(vector<string> &reserve, int n){
 
-    //cout<<n<<endl;
-    // for(int i=0;i<n;i++){
-    //     cout<<reserve[i]<<endl;
-    // }
-
     vector<vector<int>>matrix;
 
     set<int> forbid;
@@ -25,23 +20,20 @@ set<int> find_forbidden_latency(vector<string> &reserve, int n){
         matrix.push_back(dis);
 
     }
-    for(int i=0;i<matrix.size();i++){
-        for(int j=0;j<matrix[i].size();j++){
-            printf("%d ",matrix[i][j]);
-        }
-        cout<<endl;
-    }
+    // for(int i=0;i<matrix.size();i++){
+    //     for(int j=0;j<matrix[i].size();j++){
+    //         printf("%d ",matrix[i][j]);
+    //     }
+    //     cout<<endl;
+    // }
     return forbid;
-
 }
 
 set<int>find_permissible_latency(set<int>&st, int n){
     map<int,int>has;
-
     for(auto it: st){
         has[it]++;
     }
-
     set<int>ans;
     for(int i=1;i<=n;i++){
         if(has.count(i)==0) ans.insert(i);
@@ -52,6 +44,7 @@ set<int>find_permissible_latency(set<int>&st, int n){
 
 
 int main(){
+
     freopen("reservation_input.txt","r",stdin);
 
     int n = 3;
@@ -79,8 +72,8 @@ int main(){
 
     
     printf("Collision Vector:\n");
-    vector<int>temp(time,0);
-    for(auto it: forbiden_latency){
+    vector<int>temp(100,0);
+    for(auto it: permissible_latency){
         temp[it]=1;
         //cout<<it<<endl;
     }
