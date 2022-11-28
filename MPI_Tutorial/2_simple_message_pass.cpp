@@ -18,13 +18,13 @@ int main(int argc, char** argv) {
 
     //This is master process, we will pass the number from it
     if(process_Rank == 0){
-        strcpy(message,"Hello Kawsar. You need to marry");
+        strcpy(message,"Hello Kawsar.");
         MPI_Send(&message, strlen(message)+1, MPI_CHAR, 1, 1, MPI_COMM_WORLD);
         printf("Message Sent from Master process: %s\n", message);
     }
     else if(process_Rank == 1){
+        char message[1000];
         //this is slave process where we will recieve the number.
-        int n=10;
         MPI_Recv(&message, MAX, MPI_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("Message Received from Slave Process: %s\n", message);
         printf("\n");
