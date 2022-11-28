@@ -32,7 +32,7 @@ int main()
 
 	// Creating 4 threads
 	for (int i = 0; i < MAX_THREAD; i++)
-		pthread_create(&threads[i], NULL, sum_array, (void*)NULL);
+		pthread_create(&threads[i], NULL, sum_array, NULL);
 
 	// joining 4 threads i.e. waiting for all 4 threads to complete
 	for (int i = 0; i < MAX_THREAD; i++)
