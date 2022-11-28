@@ -19,7 +19,7 @@ int const sz=(int)2e5+5;
 int n,m;
 string s[sz];
 vector<pair<int,int>>adj[sz];
-map<pair<int,int>,bool>has;
+map<tuple<int, int, int> ,bool>has;
 
 set<int> getForbiddenLatency(){
     set<int>forbidden;
@@ -100,9 +100,9 @@ void Display(int ICV){
             int permi = x.second;
             cout<<"("<<getBinary(child)<<","<<permi<<") ";
 
-            if(has[{child,permi}]) continue;
+            if(has[{parent_state,child,permi}]) continue;
 
-            has[{child,permi}]=true;
+            has[{parent_state,child,permi}]=true;
             Q.push(child);
         }
         printf("\n");
@@ -121,8 +121,10 @@ void makeStateTransitionDiagram(string str_icv){
         //Print(permissible);
         for(auto permi: permissible){
             int child = ICV | (parent_state>>permi);
-            if(has[{child,permi}]) continue;
-            has[{child,permi}]=true;
+
+            if(has[{parent_state,child,permi}]) continue;
+            has[{parent_state,child,permi}]=true;
+            
             adj[parent_state].push_back(make_pair(child,permi));
             Q.push(child);
         }
