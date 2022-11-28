@@ -94,18 +94,21 @@ void Display(int ICV){
     has.clear();
     while(!Q.empty()){
         int parent_state = Q.front(); Q.pop();
-        cout<<"Parent: "<<getBinary(parent_state)<<"--->";
+        bool flag=true;
         for(auto x: adj[parent_state]){
             int child = x.first;
             int permi = x.second;
-            cout<<"("<<getBinary(child)<<","<<permi<<") ";
 
             if(has[{parent_state,child,permi}]) continue;
-
+            if(flag){
+                cout<<"Parent: "<<getBinary(parent_state)<<"--->";
+                flag=false;
+            }
+            cout<<"("<<getBinary(child)<<","<<permi<<") ";
             has[{parent_state,child,permi}]=true;
             Q.push(child);
         }
-        printf("\n");
+        if(!flag) printf("\n");
     }
 }
 
