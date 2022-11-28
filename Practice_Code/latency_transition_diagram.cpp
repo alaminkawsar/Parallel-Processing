@@ -145,7 +145,7 @@ void solve()
     for(int i=0;i<n;i++){
         cout<<s[i]<<endl;
     }
-
+    /* TASK-1: Find Forbidden Latency */
     printf("Forbidden Latency:\n");
     set<int> forbidden = getForbiddenLatency();
     for(auto it: forbidden){
@@ -154,25 +154,58 @@ void solve()
     cout<<endl;
     vector<int>permissible = getPermissible(forbidden);
 
+    /* TASK-2: Permissible Latency */
     printf("Permissible Latency:\n");
     for(auto it: permissible){
         printf("%d ",it);
     }
     printf("\n");
 
-    
+    /* TASK-3: Collision Vector */
     vector<int>collision(m+1,0);
     for(auto it: forbidden){
         collision[it]=1;
     }
-
     printf("Collistion Vector:\n");
     for(int i=m;i>=1;i--){
         printf("%d ",collision[i]);
     }
     printf("\n");
 
-    // Task-4: Draw State Transition Diagram
+    /*Task-4: Finding Collision Point*/
+    queue<pair<int,int>>Q;
+    map<pair<int,int>, bool>have;
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(s[j][i]=='1') Q.push({j,i}),have[{j,i}]=true;
+        }
+    }
+    // for(auto x: have){
+    //     p2(x.first.first+1,x.first.second+1);
+    // }
+    //check every initiation
+    for(int i=0;i<m;i++){
+        int x = 0;
+        int y = i-1;
+        bool found = true;
+        queue<pair<int,int>>temp=Q;
+        vector<pair<int,int>>store;
+        while(!temp.empty() and found){
+            auto u = temp.front(); temp.pop();
+            x=u.first,y++;
+            if(have[{x,y}]){
+                printf("Initiation(1,%d),Collision found at point(%d,%d)\n",i+1,x+1,y+1);
+                found=false;
+            }
+            store.push_back({x,y});
+        }
+        if(found){
+            for(auto it: store) have[it]=true;
+        }
+    }
+
+
+    // Task-5: Draw State Transition Diagram
 
     // make string using collision vector
     string str_icv;
